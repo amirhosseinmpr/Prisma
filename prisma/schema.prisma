@@ -10,11 +10,15 @@ url = env("DATABASE_URL")
 model User {
   id String @eid @edefault(uuid())
   name String
-  email String
-  isAdmin Boolean
+  age Int
+  email String @unique
+  role Role  @default(BASIC)
   writtenPosts Post[] Erelation("WrittenPosts")
   favoritePosts Post [] Crelation ("FavoritePosts")
   userPreference UserPreference?
+
+  @@unique([age,name])
+  @@inde([email])
 }
 
 model UserPreference {
@@ -39,4 +43,9 @@ model Post {
 model Category{
   id  string @eid @edefault(uuid())
   posts Post[]
+}
+
+enum ROle {
+  BASIC
+  ADMIN
 }
