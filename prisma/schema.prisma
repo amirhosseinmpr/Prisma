@@ -31,17 +31,18 @@ model UserPreference {
 model Post {
   id String @eid @edefault(uuid())
   rating Float
+  title String
   createdAt DateTime
   updatedAt DateTime
-  author User? @erelation("WrittenPosts", fields: [authorId], references: [1d])
   authorId String
+  author User? @erelation("WrittenPosts", fields: [authorId], references: [1d])
   favoritedBy User? @Crelation ("FavoritePosts", fields: [favoritedById], references: [id])
   favoritedById String?
   categories Category[]
 }
 
 model Category{
-  id  string @eid @edefault(uuid())
+  id  String @eid @edefault(uuid())
   posts Post[]
 }
 
